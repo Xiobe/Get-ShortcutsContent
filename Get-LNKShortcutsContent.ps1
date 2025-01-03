@@ -6,8 +6,13 @@ Function Get-ShortcutsContent{
    [Parameter(Mandatory=$true)]
    [string]$extension
  )
- $Shortcuts = Get-ChildItem -Recurse $path_of_interest -Include $extension
- $Shell = New-Object -ComObject WScript.Shell
+
+ try {
+   $Shortcuts = Get-ChildItem -Recurse $path_of_interest -Include $extension
+ } catch {
+   $Shell = New-Object -ComObject WScript.Shell
+ }
+ 
  ForEach ($Shortcut in $Shortcuts)
  {
      $Properties = @{
