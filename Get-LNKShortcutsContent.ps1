@@ -6,7 +6,14 @@ Function Get-ShortcutsContent{
    [Parameter(Mandatory=$true)]
    [string]$extension
  )
- $Shortcuts = Get-ChildItem -Recurse $path_of_interest -Include $extension
+
+ try {
+   $Shortcuts = Get-ChildItem -Recurse $path_of_interest -Include $extension
+ } catch {
+   Write-Error "An error occurred while getting shortcuts: $_"
+   return
+ }
+
  $Shell = New-Object -ComObject WScript.Shell
  ForEach ($Shortcut in $Shortcuts)
  {
