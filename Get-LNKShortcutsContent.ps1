@@ -1,6 +1,9 @@
 Function Get-ShortcutsContent{
  param(
+   [Parameter(Mandatory=$true)]
    [string]$path_of_interest,
+
+   [Parameter(Mandatory=$true)]
    [string]$extension
  )
  $Shortcuts = Get-ChildItem -Recurse $path_of_interest -Include $extension
